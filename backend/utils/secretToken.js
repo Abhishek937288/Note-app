@@ -1,9 +1,12 @@
 import jwt from "jsonwebtoken";
 
-const createSecretToken = (id)=>{
-    return jwt.sign({id},process.env.TOKEN_KEY,{
-        expiresIn :3*24*60*60,
+export const genTokenAndSetCookie = (id,res) => {
+    const token = jwt.sign({ id }, process.env.TOKEN_KEY, {
+      expiresIn: "15d",
     });
-};
 
-export default createSecretToken;
+    res.cookie("token",token, {
+        httpOnly: true,
+        maxAge: 15 * 24 * 60 * 60,
+    });
+}
