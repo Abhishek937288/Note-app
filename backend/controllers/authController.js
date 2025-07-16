@@ -6,7 +6,7 @@ import {genTokenAndSetCookie} from "../utils/secretToken.js"
 export const signUp = async (req, res) => {
   const { userName, email, password } = req.body;
 
-  if (!userName || !email || password.length <= 6) {
+  if (!userName || !email || password.length < 6) {
     return res
       .status(400)
       .json({ data: null, success: true, message: "please fill all fileds" });
@@ -59,7 +59,7 @@ export const signIn = async (req, res) => {
     });
   }
 
-  const isCorrectPass = bcrypt.compare(password,user.password);
+  const isCorrectPass = await bcrypt.compare(password,user.password);
   if (!isCorrectPass) {
     return res.json({
       data: null,

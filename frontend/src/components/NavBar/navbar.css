@@ -1,0 +1,22 @@
+.Navbar{
+    width:100vw;
+    background-color: #F8F8F8;
+    height: 12vh;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid grey;
+}
+
+
+
+.pages{
+    display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 80px;  
+}
+.pages a {
+    color: black;
+}
