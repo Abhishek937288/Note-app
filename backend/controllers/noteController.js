@@ -67,7 +67,6 @@ export const editNote = async(req,res)=>{
   }catch(err){
   return res.status(400).json({data:null,success:false,message:err.message});
   }
-
 }
 
 // delete note using its id

@@ -1,0 +1,25 @@
+.noteContainer {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.mainNote {
+  width: 75%;
+  height: 80%;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 50px;
+  border-radius: 20px;
+  background-color: #E8E8E8;
+  color: black;
+  text-align: center;
+   padding: 50px; 
+  box-sizing: border-box;
+}

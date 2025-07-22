@@ -1,0 +1,76 @@
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 1400,
+  'GRAD' 0,
+  'opsz' 24,
+}
+
+.addBtn{
+    padding: 0px 10px 0px 10px;
+    border: none;
+   background-color: transparent;
+    color: white;
+}
+
+
+
+.sidebarContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.header{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ .header p{
+    font-weight: 800;
+    font-size: xx-large;
+    font: 800;
+    color: white;
+ }
+ .sidebarContainer hr{
+   margin-bottom: 20px;
+ }
+ 
+ .sideBarMainContent{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0px 5px 0 5px;
+    
+ }
+
+ .sideBarMainContent span{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+ }
+
+ .SideBarLink {    
+   color: white;
+ }
+
+ .sideBarNote{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+ }
+
+ .sideBarNoteBtns{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+ }
+
+ .sideBarNoteBtns button{
+   border: none;
+   background-color: transparent;
+
+ }
