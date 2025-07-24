@@ -1,16 +1,16 @@
- import "dotenv/config";
+import userModel from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
-export const protectRoute = (req,res,next)=>{
-    const token = req.cookies.token;
+export const protectRoute = async (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res
+      .status(401)
+      .json({ data: null, success: false, meassage: "unauthorised" });
+  }
 
-    if(!token){
-     return res.redirect("/signIn");
-    }
-    try{
-     const decoded = jwt.verify(token,process.env.TOKEN_KEY);
-     req.user = decoded;
-     next();
-    }catch(err){
-    return res.redirect("signIn")
-    }
-}
+  const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+  
+  req.user = decoded;
+  next();
+};

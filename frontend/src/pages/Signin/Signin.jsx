@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Signin.css";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -28,33 +28,37 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentState === "SignUp") {
-        try{
-        const response = await axios.post("http://localhost:8080/api/auth/signup",payload);
-        // response.data is the actual body sent by the backend
-        const { success} = response.data; 
-        if(success){
-            navigate("/");
-            console.log(success);
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/api/auth/signup",
+          payload,{ withCredentials: true }
+        );
+
+        const { success } = response.data;
+        if (success) {
+          navigate("/");
         }
-        }catch(err){
-            console.log(err.message);
-        }
+      } catch (err) {
+        console.log(err.message);
+      }
       setFormData({
-    userName: "",
-    email: "",
-    password: "",
-  });
-    }else{
-        try{
-        const response = await axios.post("http://localhost:8080/api/auth/signin",payload);
-        const { success} = response.data; 
-        if(success){
-            navigate("/");
-            console.log(success);
+        userName: "",
+        email: "",
+        password: "",
+      });
+    } else {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/api/auth/signin",
+          payload,{ withCredentials: true }
+        );
+        const { success } = response.data;
+        if (success) {
+          navigate("/");
         }
-        }catch(err){
-            console.log(err.message);
-        }
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   };
 
@@ -63,7 +67,7 @@ const Signin = () => {
       <div className="signIn-page-box">
         <h1>Notify</h1>
         <p>Welcome to Notify</p>
-        <form  onSubmit={handleSubmit} className="signIn-page-form">
+        <form onSubmit={handleSubmit} className="signIn-page-form">
           {currentState === "SignUp" ? (
             <input
               type="text"
@@ -94,7 +98,9 @@ const Signin = () => {
             onChange={handleOnChange}
             required
           />
-          <button type="submit">{currentState === "SignIn" ? "Sign-in" : "Sign-Up"}</button>
+          <button type="submit">
+            {currentState === "SignIn" ? "Sign-in" : "Sign-Up"}
+          </button>
         </form>
         {currentState === "SignIn" ? (
           <p>

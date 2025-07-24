@@ -12,7 +12,7 @@ const Form = () => {
     formData,
     setFormData,
     id,
-    setId
+    setId,
   } = useContext(UserContext);
 
   const handleOnChange = (e) => {
@@ -21,7 +21,6 @@ const Form = () => {
       ...prev,
       [name]: value,
     }));
-   
   };
 
   const handleSubmit = async (e) => {
@@ -30,28 +29,29 @@ const Form = () => {
       try {
         const response = await axios.post(
           "http://localhost:8080/api/note/createnote",
-          formData
+          formData,
+          { withCredentials: true }
         );
-        const data = response.data.data;
-        console.log(data);
+        const data = response.data;
+
         setFormData({ title: "", description: "" });
         setIsForm(false);
         setRefresh(!refresh);
-        
       } catch (err) {
         console.log(err.message);
       }
     } else {
       const response = await axios.put(
         `http://localhost:8080/api/note/editnote/${id}`,
-        formData
+        formData,
+        {
+          withCredentials: true,
+        }
       );
-      const data = response.data.data;
-      console.log(data);
+      const data = response.data;
       setFormData({ title: "", description: "" });
       setIsForm(false);
       setRefresh(!refresh);
-     
     }
   };
 

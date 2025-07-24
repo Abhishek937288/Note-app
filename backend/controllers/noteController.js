@@ -1,82 +1,157 @@
-
 import Note from "../models/noteModel.js";
 
-// get data (get all notes)
-
+// ✅ Get all notes for the logged-in user
 export const noteData = async (req, res) => {
-  const notes = await Note.find();
-  res.json(notes);
+  try {
+    const notes = await Note.find({ user: req.user.id });
+    res.status(200).json({
+      data: notes,
+      success: true,
+      message: "Note data found successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      data: null,
+      success: false,
+      message: "Internal server error",
+    });
+  }
 };
 
-// creat new note
-
+// ✅ Create a new note
 export const createNote = async (req, res) => {
   const { title, description } = req.body;
   if (!title || !description) {
-    return res.json({
+    return res.status(400).json({
       data: null,
       success: false,
-      message: "please enter all fields",
+      message: "Please enter all fields",
     });
   }
-  const newNote = new Note(req.body);
-  const savedNote = await newNote.save();
-  res
-    .status(201)
-    .json({
-      data: savedNote,
-      success: true,
-      message: "note saved succesfully",
+
+  try {
+    const note = await Note.create({
+      title,
+      description,
+      user: req.user.id,
     });
+
+    res.status(201).json({
+      data: note,
+      success: true,
+      message: "Note created successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      data: null,
+      success: false,
+      message: "Something went wrong",
+    });
+  }
 };
 
-// get item using id (single note)
-
- export const getNote = async (req, res) => {
-  const id = req.params.id;
+// ✅ Get a single note by ID
+export const getNote = async (req, res) => {
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({
       data: null,
       success: false,
-      message: false,
+      message: "Invalid note ID",
     });
   }
 
- const note = await Note.findById(id);
-  if (!note) {
-    return res
-      .status(400)
-      .json({ data: null, success: false, message: "note not found" });
-  }
+  try {
+    const note = await Note.findById(id);
+    if (!note || note.user.toString() !== req.user.id) {
+      return res.status(404).json({
+        data: null,
+        success: false,
+        message: "Note not found",
+      });
+    }
 
-  res.status(201).json({ data: note });
+    res.status(200).json({
+      data: note,
+      success: true,
+      message: "Note fetched successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      data: null,
+      success: false,
+      message: "Internal server error",
+    });
+  }
 };
 
+// ✅ Edit a note by ID
+export const editNote = async (req, res) => {
+  const { id } = req.params;
+  const { title, description } = req.body;
 
-// Edit note using its id
-
-export const editNote = async(req,res)=>{
-  const {id} = req.params;
-  const {title,description}=req.body;
-  if(!title || !description){
-    return res.status(400).json({data:null, success:false , message:"please fill all fields"});
-  }
-  try{
-    const updatedNote = await Note.findByIdAndUpdate(id,{title,description},{ new: true });
-    return res.status(200).json({data:updatedNote,success:true,message:"note updated successfully"})
-  }catch(err){
-  return res.status(400).json({data:null,success:false,message:err.message});
-  }
-}
-
-// delete note using its id
-
-export const deleteNote = async(req,res)=>{
-  const {id}= req.params;
-  try{const deletedNote = await Note.findByIdAndDelete(id);
-    return res.status(200).json({data:deletedNote,success:true,message:"note deleted successfully"})
-  }catch(err){
-  return res.status(400).json({data:null,success:false,message:err.message});
+  if (!title || !description) {
+    return res.status(400).json({
+      data: null,
+      success: false,
+      message: "Please fill all fields",
+    });
   }
 
-}
+  try {
+    const updatedNote = await Note.findByIdAndUpdate(
+      id,
+      { title, description },
+      { new: true }
+    );
+
+    if (!updatedNote || updatedNote.user.toString() !== req.user.id) {
+      return res.status(404).json({
+        data: null,
+        success: false,
+        message: "Note not found",
+      });
+    }
+
+    return res.status(200).json({
+      data: updatedNote,
+      success: true,
+      message: "Note updated successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      data: null,
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+// ✅ Delete a note by ID
+export const deleteNote = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedNote = await Note.findByIdAndDelete(id);
+
+    if (!deletedNote || deletedNote.user.toString() !== req.user.id) {
+      return res.status(404).json({
+        data: null,
+        success: false,
+        message: "Note not found",
+      });
+    }
+
+    return res.status(200).json({
+      data: deletedNote,
+      success: true,
+      message: "Note deleted successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      data: null,
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState ,useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./Note.css";
 import axios from "axios";
@@ -12,23 +12,30 @@ const getId = () => {
 
 const Note = () => {
   const { refresh } = useContext(UserContext);
-
-  const id = getId();
   const [noteData, setNoteData] = useState({ title: "", description: "" });
+  const id = getId();
+
   useEffect(() => {
     const fetchData = async () => {
+      if (!id || id === ":id") {
+        setNoteData({ title: "", description: "" });
+        return;
+      }
+
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/note/getnote/${id}`
+          `http://localhost:8080/api/note/getnote/${id}`,
+          { withCredentials: true }
         );
         const data = response.data.data;
         setNoteData({ title: data.title, description: data.description });
       } catch (err) {
-        console.log(err.message);
+        console.log("Error fetching note:", err.message);
       }
     };
+
     fetchData();
-  }, [id]);
+  }, [id, refresh]);
 
   return (
     <div className="noteContainer">
