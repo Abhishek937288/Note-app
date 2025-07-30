@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Signin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -36,7 +37,16 @@ const Signin = () => {
 
         const { success } = response.data;
         if (success) {
+          toast.success("successfully singend in ")
           navigate("/");
+        }else{
+          toast.error("something went wrong please try again");
+          setFormData({
+        userName: "",
+        email: "",
+        password: "",
+      });
+          
         }
       } catch (err) {
         console.log(err.message);
@@ -55,6 +65,13 @@ const Signin = () => {
         const { success } = response.data;
         if (success) {
           navigate("/");
+          toast.success("successfully loged in")
+        }else{
+          toast.error("wrong id or password");
+          setFormData({
+        email: "",
+        password: "",
+      });
         }
       } catch (err) {
         console.log(err.message);

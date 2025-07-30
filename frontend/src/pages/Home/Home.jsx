@@ -1,13 +1,20 @@
-import React from 'react';
+import React from "react";
 import "./Home.css";
-// import Dummy from '../../components/NavBar/dummy';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  return (<>
-    <div>Home</div>
-    {/* <Dummy/> */}
+   const navigate = useNavigate();
+  return (
+    <>
+      <div className="homeContainer">
+        <h4>Tame your work, organize your life <br />Best Note Taking App</h4>
+        <p>Capture your note, files and life' work all in one secure place</p>
+        <button onClick={()=>{
+          navigate("/notes/:id");
+        }}>Get Started for free</button>
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default Home;

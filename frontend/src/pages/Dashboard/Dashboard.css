@@ -15,3 +15,41 @@
   height: 100vh;
   background-color: #484848;
 }
+
+
+@media (min-width: 481px) and (max-width: 768px){
+ .mainContainer{
+  display: flex;
+  flex-direction: column;
+ }
+.sideBar {
+  width: 100vw;
+  height: 50vh;
+  background-color: #181818;
+}
+
+.rightSide {
+  width: 100vw;
+  height: 100vh;
+  background-color: #484848;
+}
+}
+
+
+@media (max-width: 480px){
+.mainContainer{
+  display: flex;
+  flex-direction: column;
+ }
+.sideBar {
+  width: 100vw;
+  height: 50vh;
+  background-color: #181818;
+}
+
+.rightSide {
+  width: 100vw;
+  height: 100vh;
+  background-color: #484848;
+}
+}

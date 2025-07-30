@@ -18,12 +18,12 @@
 
 .sidebarContainer{
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column;   
 }
 
 .header{
-    padding: 20px;
+    padding: 0 2vw 0 2vw;
+    height: 5vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,9 +57,10 @@
  }
 
  .sideBarNote{
+    padding: 0 2vw 0 2vw;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
  }
 
  .sideBarNoteBtns{
@@ -73,4 +74,58 @@
    border: none;
    background-color: transparent;
 
+ }
+
+ @media (min-width: 481px) and (max-width: 768px){
+ .header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px 20px 30px;
+ }
+ .sideBarMainContent{
+   width: 80vw;
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+ }
+
+ .sideBarNote{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ }
+ }
+
+ @media (max-width: 480px){
+  .sidebarContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .sidebarContainer hr{
+   margin-bottom: 5px;
+   width: 100%;
+ }
+  .header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5vw 10vw 5vw 10vw; 
+  gap: 25vw;
+ }
+ .sideBarMainContent{
+   width: 80vw;
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+ }
+
+ .sideBarNote{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ }
  }

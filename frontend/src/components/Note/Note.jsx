@@ -5,20 +5,17 @@ import "./Note.css";
 import axios from "axios";
 import { UserContext } from "../../context/noteContex";
 
-const getId = () => {
-  const { id } = useParams();
-  return id;
-};
-
 const Note = () => {
+  const { id } = useParams();
+
   const { refresh } = useContext(UserContext);
   const [noteData, setNoteData] = useState({ title: "", description: "" });
-  const id = getId();
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!id || id === ":id") {
+      if (!id || id === ":id" || id === "random") {
         setNoteData({ title: "", description: "" });
+
         return;
       }
 
@@ -27,6 +24,13 @@ const Note = () => {
           `http://localhost:8080/api/note/getnote/${id}`,
           { withCredentials: true }
         );
+
+        if (response.data.status === 404) {
+          setNoteData({
+            title: "this is note not available select another one ",
+            description: "",
+          });
+        }
         const data = response.data.data;
         setNoteData({ title: data.title, description: data.description });
       } catch (err) {

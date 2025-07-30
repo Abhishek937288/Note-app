@@ -1,0 +1,92 @@
+.homeContainer{
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+    background-image: url(../../assets/notebook.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.homeContainer h4{
+    font-size: 3vw;
+    color: black;
+}
+
+.homeContainer p{
+    font-size: 1.5vw;
+    font-weight: 700;
+}
+
+.homeContainer button{
+    padding: 1vw 3vw 1vw 3vw;
+    border-radius: 0.7vw;
+    border: none;
+   background-color: black;
+   color: white;
+   text-align: center;
+   font-size: 1.5vw;
+   cursor: pointer;
+}
+
+.homeContainer button:hover{
+    transform: scale(1.05);
+    transition: 0.5s;
+     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 481px) and (max-width: 768px){
+    .homeContainer{
+        display: flex;
+        gap: 2vw;
+    }
+    .homeContainer h4{
+    font-size: 4vw;
+    color: black;
+}
+
+.homeContainer p{
+    font-size: 2vw;
+    font-weight: 700;
+}
+.homeContainer button{
+    padding: 0.9vw 2.5vw 0.9vw 2.5vw;
+    border-radius: 0.5vw;
+    border: none;
+   background-color: black;
+   color: white;
+   text-align: center;
+   font-size: 1.3vw;
+   cursor: pointer;
+}
+
+}
+
+@media (max-width: 480px){
+.homeContainer{
+    display: flex;
+    gap: 7vw;
+}
+
+  .homeContainer h4{
+    font-size: 6vw;
+    color: black;
+}
+
+.homeContainer p{
+    font-size: 3.5vw;
+    font-weight: 800;
+}
+.homeContainer button{
+    padding: 6vw 12vw 6vw 12vw;
+    border-radius: 0.5vw;
+    border: none;
+   background-color: black;
+   color: white;
+   text-align: center;
+   font-size: 3vw;
+   cursor: pointer;
+}
+}

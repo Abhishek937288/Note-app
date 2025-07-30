@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./sideBar.css";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/noteContex";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { setIsForm, setFormMode, refresh, setRefresh, setFormData, setId } =
+  const { setIsForm, setFormMode, refresh, setRefresh, setFormData, setId,id } =
     useContext(UserContext);
 
   useEffect(() => {
@@ -18,19 +20,29 @@ const Sidebar = () => {
           "http://localhost:8080/api/note/noteData",
           { withCredentials: true }
         );
+    
         const data = response.data;
-        if (data.success == false) {
+        if (data.success === false) {
           setData([]);
+         setError("unauthorized");
         } else {
           setData(data.data);
         }
       } catch (err) {
-        setError(err.message);
-        setLoading(false);
+        if (err.response && err.response.status === 401) {
+    setError("unauthorized");
+  }
       }
     };
     fetchData();
-  }, [refresh]);
+  }, [id,refresh]);
+
+  useEffect(()=>{
+  if(error === "unauthorized"){
+     toast.error("Please signIn or signUp");
+    navigate("/signin");
+  }
+  },[error,navigate]);
 
   const handleAddClick = () => {
     setIsForm(true);
@@ -52,10 +64,11 @@ const Sidebar = () => {
   const handleDeleteClick = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/note/deletenote/${id}`,{withCredentials:true}
+        `http://localhost:8080/api/note/deletenote/${id}`,
+        { withCredentials: true }
       );
       const data = response.data;
-      setRefresh(!refresh);
+      setRefresh(!refresh);   
     } catch (err) {
       console.log(err.message);
     }

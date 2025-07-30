@@ -33,7 +33,7 @@ const Form = () => {
           { withCredentials: true }
         );
         const data = response.data;
-
+        
         setFormData({ title: "", description: "" });
         setIsForm(false);
         setRefresh(!refresh);

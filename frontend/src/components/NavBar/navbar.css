@@ -1,22 +1,95 @@
-.Navbar{
-    width:100vw;
-    background-color: #F8F8F8;
-    height: 12vh;
-    position: sticky;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-bottom: 1px solid grey;
+.Navbar {
+  position: relative;
+  width: 100vw;
+  background-color: black;
+  color: white;
+  height: 12vh;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding: 0 10vw 0 10vw;
 }
 
+.logo i {
+  color: white;
+  font-size: 40px;
+}
 
-
-.pages{
-    display: flex;
-   align-items: center;
-   justify-content: space-between;
-   gap: 80px;  
+.pages {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5vw;
 }
 .pages a {
-    color: black;
+  color: white;
 }
+.pages a:hover {
+  transform: scale(1.05);
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.menu-Links {
+  position: fixed;
+  top: 12vh;
+  left: 15vh;
+  height: 50vh;
+  width: 30vh;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh;
+  font-size: 25px;
+}
+
+.links a {
+  color: white;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.close {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 3vw;
+  cursor: pointer;
+}
+
+.hamBurgerMenu {
+    display: none;
+}
+
+.close i {
+  font-size: 5vh;
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .Navbar {
+    padding: 0 60px 0 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pages {
+    display: none;
+  }
+  .hamBurgerMenu {
+    display: block;
+    font-size: 30px;
+  }
+}
+
