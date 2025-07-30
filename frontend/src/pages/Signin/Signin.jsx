@@ -31,7 +31,7 @@ const Signin = () => {
     if (currentState === "SignUp") {
       try {
         const response = await axios.post(
-          `${backendUrl}/api/auth/signup`,
+          `${backendUrl}/auth/signup`,
           payload,{ withCredentials: true }
         );
 
