@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./sideBar.css";
+import "./sidebar.css";
 import { Link ,useNavigate} from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/noteContex";
