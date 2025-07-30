@@ -5,14 +5,17 @@ import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import noteRoute from "./routes/noteRoute.js";
 import cookieParser from "cookie-parser";
+import {env} from "envgaurd";
 
 const app = express();
 
-const port = process.env.PORT || 5000;
+const port = env("PORT",5000);
+const frontEndUrl = env("FRONTEND_URL");
+
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [frontEndUrl],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
