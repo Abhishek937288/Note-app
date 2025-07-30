@@ -25,7 +25,9 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/note", noteRoute);
 
-
+app.get("/api/health", (req,res)=>{
+res.json({success:true});
+} )
 connectDB();
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
