@@ -3,7 +3,7 @@ import "./Signin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+const backendUrl = import.meta.env.VITE_BACKEND_URL ;
 const Signin = () => {
   const navigate = useNavigate();
   const [currentState, setCurrentState] = useState("SignUp");
@@ -31,7 +31,7 @@ const Signin = () => {
     if (currentState === "SignUp") {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/auth/signup",
+          `${backendUrl}/api/auth/signup`,
           payload,{ withCredentials: true }
         );
 
@@ -59,7 +59,7 @@ const Signin = () => {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/auth/signin",
+          `${backendUrl}/auth/signin`,
           payload,{ withCredentials: true }
         );
         const { success } = response.data;

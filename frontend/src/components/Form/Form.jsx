@@ -3,6 +3,8 @@ import "./form.css";
 import { UserContext } from "../../context/noteContex";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL ;
+
 const Form = () => {
   const {
     formMode,
@@ -22,13 +24,13 @@ const Form = () => {
       [name]: value,
     }));
   };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formMode === "add") {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/note/createnote",
+          `${backendUrl}/note/createnote`,
           formData,
           { withCredentials: true }
         );
@@ -42,7 +44,7 @@ const Form = () => {
       }
     } else {
       const response = await axios.put(
-        `http://localhost:8080/api/note/editnote/${id}`,
+        `${backendUrl}/note/editnote/${id}`,
         formData,
         {
           withCredentials: true,

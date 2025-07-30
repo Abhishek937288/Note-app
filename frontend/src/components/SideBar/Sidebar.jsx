@@ -4,6 +4,8 @@ import { Link ,useNavigate} from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/noteContex";
 import { toast } from "react-toastify";
+ 
+const backendUrl = import.meta.env.VITE_BACKEND_URL ;
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const Sidebar = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/note/noteData",
+            `${backendUrl}/note/noteData`,
           { withCredentials: true }
         );
     
@@ -51,7 +53,7 @@ const Sidebar = () => {
 
   const handleEditClick = async (id) => {
     const response = await axios.get(
-      `http://localhost:8080/api/note/getnote/${id}`,
+      `${backendUrl}/note/getnote/${id}`,
       { withCredentials: true }
     );
     const data = response.data.data;
@@ -64,7 +66,7 @@ const Sidebar = () => {
   const handleDeleteClick = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/note/deletenote/${id}`,
+        `${backendUrl}/note/deletenote/${id}`,
         { withCredentials: true }
       );
       const data = response.data;

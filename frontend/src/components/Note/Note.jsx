@@ -5,6 +5,8 @@ import "./Note.css";
 import axios from "axios";
 import { UserContext } from "../../context/noteContex";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL ;
+
 const Note = () => {
   const { id } = useParams();
 
@@ -21,7 +23,7 @@ const Note = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/note/getnote/${id}`,
+          `${backendUrl}/note/getnote/${id}`,
           { withCredentials: true }
         );
 
